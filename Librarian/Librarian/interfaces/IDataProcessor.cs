@@ -1,6 +1,12 @@
-﻿namespace Librarian.interfaces
+﻿using Librarian.models;
+namespace Librarian.interfaces
 {
-    internal interface IDataProcessor
+    public interface IDataProcessor
     {
+        List<BookModel> AddBook(BookModel book);
+        List<BookModel> DeleteBook(BookModel book);
+        BookModel GetBook(string searchString);
+        List<BookModel> SortBooks(List<BookModel> list);
+        List<BookModel> ViewList();
     }
 }

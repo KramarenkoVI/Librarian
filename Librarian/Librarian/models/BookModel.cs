@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Xml.Serialization;
 
 namespace Librarian.models
 {
-    internal class BookModel
+    public class BookModel
     {
-
+        [XmlElement("title")]
+        public string? Title { get; set; }
+        [XmlElement("author")]
+        public string? Author { get; set; }
+        [XmlElement("pages")]
+        public int Pages { get; set; }
     }
 }
