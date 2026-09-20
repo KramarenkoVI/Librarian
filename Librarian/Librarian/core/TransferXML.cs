@@ -23,7 +23,7 @@ namespace Librarian.core
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error reading data:({ex.Message})");
+                Console.WriteLine($"Error reading data: ({ex.Message})");
                 return new List<BookModel>();
             }
         }
@@ -43,7 +43,7 @@ namespace Librarian.core
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving data:({ex.Message})");
+                Console.WriteLine($"Error saving data: ({ex.Message})");
             }
         }
     }

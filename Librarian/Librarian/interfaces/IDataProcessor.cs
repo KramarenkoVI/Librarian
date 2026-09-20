@@ -5,8 +5,10 @@ namespace Librarian.interfaces
     {
         List<BookModel> AddBook(BookModel book);
         List<BookModel> DeleteBook(BookModel book);
-        BookModel GetBook(string searchString);
+        List<BookModel> DeleteBook(int id);
+        List<BookModel> SerachBooks(string searchString);
         List<BookModel> SortBooks(List<BookModel> list);
+        List<BookModel> SortBooks();
         List<BookModel> ViewList();
     }
 }

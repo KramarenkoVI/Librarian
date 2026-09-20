@@ -5,9 +5,9 @@ namespace Librarian.models
     public class BookModel
     {
         [XmlElement("title")]
-        public string? Title { get; set; }
+        public required string Title { get; set; }
         [XmlElement("author")]
-        public string? Author { get; set; }
+        public required string Author { get; set; }
         [XmlElement("pages")]
         public int Pages { get; set; }
     }
