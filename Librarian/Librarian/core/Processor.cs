@@ -22,7 +22,7 @@ namespace Librarian.core
             catch(Exception ex)
             {
                 Console.WriteLine($"Error adding data: ({ex.Message})");
-                return new List<BookModel>();
+                throw;
             }
         }
 
@@ -38,15 +38,14 @@ namespace Librarian.core
                 if (delBook is null)
                     return CurrentBooks;
 
-                if (!CurrentBooks.Remove(delBook))
-                    throw new Exception("Something's wrong! The item wasn't deleted.");
+                CurrentBooks.Remove(delBook);
 
                 return CurrentBooks;
             }
             catch(Exception ex)
             {
                 Console.WriteLine($"Error deleting data: ({ex.Message})");
-                return new List<BookModel>();
+                throw;
             }
         }
 
@@ -54,16 +53,13 @@ namespace Librarian.core
         {
             try
             {
-                if (id < 0 || id > CurrentBooks.Count)
-                    throw new Exception("invalid id");
-
                 CurrentBooks.RemoveAt(id);
                 return CurrentBooks;
             }
             catch (Exception ex)
             { 
                 Console.WriteLine($"Error deleting data: ({ex.Message})");
-                return new List<BookModel>();
+                throw;
             }
         }
 
@@ -72,24 +68,16 @@ namespace Librarian.core
             try
             {
                 if (string.IsNullOrEmpty(searchString))
-                    throw new Exception("Search field is empty");
+                    return new List<BookModel>();
 
                 searchString = searchString.ToLower();
                 List<BookModel> searchResult = CurrentBooks.Where(books => books.Title.ToLower().Contains(searchString)).ToList();
-                if (searchResult.Count == 0)
-                    throw new ArgumentNullException();
-
                 return searchResult;
-            }
-            catch(ArgumentNullException ex)
-            {
-                Console.WriteLine($"book not found: ({searchString})");
-                return null;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Data search error: ({ex.Message})");
-                return null;
+                throw;
             }
         }
 
@@ -103,7 +91,7 @@ namespace Librarian.core
             catch (Exception ex)
             {
                 Console.WriteLine($"Data sorting error: ({ex.Message})");
-                return new List<BookModel>();
+                throw;
             }
         }
 
@@ -117,7 +105,7 @@ namespace Librarian.core
             catch (Exception ex)
             {
                 Console.WriteLine($"Data sorting error: ({ex.Message})");
-                return new List<BookModel>();
+                throw;
             }
         }
 
@@ -130,7 +118,7 @@ namespace Librarian.core
             catch (Exception ex)
             {
                 Console.WriteLine($"Data display error: ({ex.Message})");
-                return new List<BookModel>();
+                throw;
             }
         }
     }

@@ -11,6 +11,7 @@ namespace Librarian.core
             {
                 if (!File.Exists(filePath))
                     throw new Exception("File not found");
+
                 List<BookModel> books = new List<BookModel>();
                 var reader = new XmlSerializer(typeof(ListOfBooksModel));
                 using var stream = File.OpenRead(filePath);
@@ -24,7 +25,7 @@ namespace Librarian.core
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading data: ({ex.Message})");
-                return new List<BookModel>();
+                throw;
             }
         }
 
@@ -44,6 +45,7 @@ namespace Librarian.core
             catch (Exception ex)
             {
                 Console.WriteLine($"Error saving data: ({ex.Message})");
+                throw;
             }
         }
     }
