@@ -4,6 +4,6 @@ namespace Librarian.interfaces
     public interface IDataTransfer
     {
         List<BookModel> GetData(string filePath);
-        void SaveData();
+        void SaveData(string filePath, List<BookModel> books);
     }
 }
