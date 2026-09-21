@@ -13,15 +13,10 @@ namespace Librarian.core
                 if (!File.Exists(filePath))
                     throw new Exception("File not found");
 
-                List<BookModel> books = new List<BookModel>();
                 var reader = new XmlSerializer(typeof(ListOfBooksModel));
                 using var stream = File.OpenRead(filePath);
                 var data = (ListOfBooksModel)reader.Deserialize(stream);
-                foreach(BookModel book in data.Books)
-                {
-                    books.Add(book);
-                }
-                return books;
+                return data.Books;
             }
             catch (Exception ex)
             {
@@ -35,7 +30,7 @@ namespace Librarian.core
             try
             {
                 if (books is null)
-                    throw new ArgumentNullException(nameof(books), "The books collection cannot be null.");
+                    throw new ArgumentNullException(nameof(books), "The books collection cannot be null");
 
                 ListOfBooksModel data = new ListOfBooksModel();
                 foreach (BookModel book in books)

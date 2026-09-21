@@ -17,16 +17,38 @@ namespace Librarian.Tests
         }
 
         [Fact]
+        public void AddBookNull()
+        {
+            List<BookModel> books = GetTestData();
+            IDataProcessor processor = new Processor(books);
+            var exception = Assert.Throws<ArgumentNullException>(() => processor.AddBook(null));
+            Assert.Contains("invalid book object", exception.Message);
+        }
+
+        [Fact]
         public void SortBooks()
         {
             List<BookModel> books = GetTestData();
             IDataProcessor processor = new Processor(books);
             IDataTransfer delivery = new TransferXML();
-            List<BookModel> sortedExample = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(sorted).xml"));
+            List<BookModel> expectedExample = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(sorted).xml"));
             books = processor.SortBooks();
-            var expectedTitles = books.Select(book => book.Title);
-            var sortedTitles = sortedExample.Select(book => book.Title);
-            Assert.Equal(expectedTitles, sortedTitles);
+            var actualTitles = books.Select(book => book.Title);
+            var expectedTitles = expectedExample.Select(book => book.Title);
+            Assert.Equal(expectedTitles, actualTitles);
+        }
+
+        [Fact]
+        public void SortCustomBooks()
+        {
+            List<BookModel> books = GetTestData();
+            IDataProcessor processor = new Processor(books);
+            IDataTransfer delivery = new TransferXML();
+            List<BookModel> expectedExample = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(sorted).xml"));
+            books = processor.SortBooks(books);
+            var actualTitles = books.Select(book => book.Title);
+            var expectedTitles = expectedExample.Select(book => book.Title);
+            Assert.Equal(expectedTitles, actualTitles);
         }
 
         [Fact]
@@ -34,9 +56,20 @@ namespace Librarian.Tests
         {
             List<BookModel> books = GetTestData();
             IDataProcessor processor = new Processor(books);
-            books = processor.SerachBooks("ride and");
+            books = processor.SearchBooks("ride and");
             BookModel result = Assert.Single<BookModel>(books);
-            Assert.True(result.Title == "Pride and Prejudice" && result.Author == "Jane Austen" && result.Pages == 62);
+            Assert.Equal("Pride and Prejudice", result.Title);
+            Assert.Equal("Jane Austen", result.Author);
+            Assert.Equal(62, result.Pages);
+        }
+
+        [Fact]
+        public void SearchBooks()
+        {
+            List<BookModel> books = GetTestData();
+            IDataProcessor processor = new Processor(books);
+            books = processor.SearchBooks("and");
+            Assert.Equal(8, books.Count);
         }
 
         [Fact]
@@ -44,8 +77,8 @@ namespace Librarian.Tests
         {
             List<BookModel> books = GetTestData();
             IDataProcessor processor = new Processor(books);
-            var searchByLower = processor.SerachBooks("b").Select(book => book.Title);
-            var searchByUpper = processor.SerachBooks("B").Select(book => book.Title);
+            var searchByLower = processor.SearchBooks("b").Select(book => book.Title);
+            var searchByUpper = processor.SearchBooks("B").Select(book => book.Title);
             Assert.Equal(searchByLower, searchByUpper);
         }
 
@@ -54,7 +87,7 @@ namespace Librarian.Tests
         {
             List<BookModel> books = GetTestData();
             IDataProcessor processor = new Processor(books);
-            books = processor.SerachBooks(string.Empty);
+            books = processor.SearchBooks(string.Empty);
             Assert.Empty(books);
         }
 
@@ -63,7 +96,7 @@ namespace Librarian.Tests
         {
             List<BookModel> books = GetTestData();
             IDataProcessor processor = new Processor(books);
-            books = processor.SerachBooks("Murder in the Orient Express");
+            books = processor.SearchBooks("Murder in the Orient Express");
             Assert.Empty(books);
         }
 
@@ -75,6 +108,26 @@ namespace Librarian.Tests
             BookModel delBook = books[books.Count - 1];
             books = processor.DeleteBook(delBook);
             Assert.DoesNotContain<BookModel>(delBook, books);
+        }
+
+        [Fact]
+        public void DeleteBookNull()
+        {
+            List<BookModel> books = GetTestData();
+            IDataProcessor processor = new Processor(books);
+            var exception = Assert.Throws<ArgumentNullException>(() => processor.DeleteBook(null));
+            Assert.Contains("invalid book object", exception.Message);
+        }
+
+        [Fact]
+        public void DeleteNonExistentBook()
+        {
+            List<BookModel> books = GetTestData();
+            IDataProcessor processor = new Processor(books);
+            BookModel delBook = new BookModel(){ Author = "Unknown Author", Title = "Unknown Title", Pages = 90 };
+            int currentCount = books.Count;
+            books = processor.DeleteBook(delBook);
+            Assert.Equal(currentCount, books.Count);
         }
 
         [Fact]
@@ -103,12 +156,6 @@ namespace Librarian.Tests
         {
             IDataTransfer delivery = new TransferXML();
             return delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks.xml"));
-        }
-
-        private void SaveTestData(List<BookModel> data)
-        {
-            IDataTransfer delivery = new TransferXML();
-            delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), data);
         }
         #endregion
     }

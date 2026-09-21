@@ -11,7 +11,7 @@ public class TransferTests
     {
         IDataTransfer delivery = new TransferXML();
         List<BookModel> books = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks.xml"));
-        Assert.True(books.Count == 42);
+        Assert.Equal(42, books.Count);
     }
 
     [Fact]
@@ -29,7 +29,7 @@ public class TransferTests
         List<BookModel> books = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks.xml"));
         delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), books);
         List<BookModel> savedBooks = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"));
-        Assert.True(savedBooks.Count == 42);
+        Assert.Equal(42, savedBooks.Count);
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class TransferTests
         IDataTransfer delivery = new TransferXML();
         delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), new List<BookModel>());
         List<BookModel> savedBooks = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"));
-        Assert.True(savedBooks.Count == 0);
+        Assert.Empty(savedBooks);
     }
 
     [Fact]
@@ -46,20 +46,6 @@ public class TransferTests
     {
         IDataTransfer delivery = new TransferXML();
         var exception = Assert.Throws<ArgumentNullException>(() => delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), null));
-        Assert.Equal("The books collection cannot be null. (Parameter 'books')", exception.Message);
+        Assert.Equal("The books collection cannot be null (Parameter 'books')", exception.Message);
     }
-
-    #region Helpers
-    private List<BookModel> GetTestData()
-    {
-        IDataTransfer delivery = new TransferXML();
-        return delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks.xml"));
-    }
-
-    private void SaveTestData(List<BookModel> data)
-    {
-        IDataTransfer delivery = new TransferXML();
-        delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), data);
-    }
-    #endregion
 }

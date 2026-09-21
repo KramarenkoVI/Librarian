@@ -5,7 +5,7 @@ namespace Librarian.core
 {
     public class Processor : IDataProcessor
     {
-        List<BookModel> CurrentBooks { get; set; }
+        private List<BookModel> CurrentBooks { get; set; }
 
         public Processor(List<BookModel> books)
         {
@@ -16,8 +16,11 @@ namespace Librarian.core
         {
             try
             {
+                if (book is null)
+                    throw new ArgumentNullException(nameof(book), "invalid book object");
+
                 CurrentBooks.Add(book);
-                return CurrentBooks;
+                return CurrentBooks.ToList();
             }
             catch(Exception ex)
             {
@@ -31,16 +34,16 @@ namespace Librarian.core
             try
             {
                 if (book is null)
-                    throw new Exception("invalid book object");
+                    throw new ArgumentNullException(nameof(book), "invalid book object");
 
-                BookModel? delBook = CurrentBooks.FirstOrDefault(x => x.Title == book.Title && x.Author == book.Author);
+                BookModel? delBook = CurrentBooks.FirstOrDefault(x => x.Title == book.Title && x.Author == book.Author && x.Pages == book.Pages);
 
                 if (delBook is null)
-                    return CurrentBooks;
+                    return CurrentBooks.ToList();
 
                 CurrentBooks.Remove(delBook);
 
-                return CurrentBooks;
+                return CurrentBooks.ToList();
             }
             catch(Exception ex)
             {
@@ -54,7 +57,7 @@ namespace Librarian.core
             try
             {
                 CurrentBooks.RemoveAt(id);
-                return CurrentBooks;
+                return CurrentBooks.ToList();
             }
             catch(ArgumentOutOfRangeException ex)
             {
@@ -67,7 +70,7 @@ namespace Librarian.core
             }
         }
 
-        public List<BookModel> SerachBooks(string searchString)
+        public List<BookModel> SearchBooks(string searchString)
         {
             try
             {
@@ -104,7 +107,7 @@ namespace Librarian.core
             try
             {
                 CurrentBooks = CurrentBooks.OrderBy(books => books.Author).ThenBy(books => books.Title).ToList();
-                return CurrentBooks;
+                return CurrentBooks.ToList();
             }
             catch (Exception ex)
             {
@@ -117,7 +120,7 @@ namespace Librarian.core
         {
             try
             {
-                return CurrentBooks;
+                return CurrentBooks.ToList();
             }
             catch (Exception ex)
             {
