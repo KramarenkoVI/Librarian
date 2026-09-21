@@ -9,6 +9,6 @@ namespace Librarian.models
         [XmlElement("author")]
         public required string Author { get; set; }
         [XmlElement("pages")]
-        public int Pages { get; set; }
+        public required int Pages { get; set; }
     }
 }

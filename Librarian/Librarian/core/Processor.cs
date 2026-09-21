@@ -56,6 +56,10 @@ namespace Librarian.core
                 CurrentBooks.RemoveAt(id);
                 return CurrentBooks;
             }
+            catch(ArgumentOutOfRangeException ex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id), id, "The specified book index is outside the valid range of the collection.");
+            }
             catch (Exception ex)
             { 
                 Console.WriteLine($"Error deleting data: ({ex.Message})");
