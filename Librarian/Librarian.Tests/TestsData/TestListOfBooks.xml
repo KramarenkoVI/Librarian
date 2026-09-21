@@ -1,0 +1,213 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<library>
+	<book>
+		<author>George Orwell</author>
+		<title>1984</title>
+		<pages>377</pages>
+	</book>
+	<book>
+		<author>George Orwell</author>
+		<title>Animal Farm</title>
+		<pages>107</pages>
+	</book>
+	<book>
+		<author>Jane Austen</author>
+		<title>Pride and Prejudice</title>
+		<pages>62</pages>
+	</book>
+	<book>
+		<author>Jane Austen</author>
+		<title>Sense and Sensibility</title>
+		<pages>429</pages>
+	</book>
+	<book>
+		<author>Jane Austen</author>
+		<title>Emma</title>
+		<pages>190</pages>
+	</book>
+	<book>
+		<author>Ray Bradbury</author>
+		<title>Fahrenheit 451</title>
+		<pages>175</pages>
+	</book>
+	<book>
+		<author>Ray Bradbury</author>
+		<title>The Martian Chronicles</title>
+		<pages>164</pages>
+	</book>
+	<book>
+		<author>Ray Bradbury</author>
+		<title>Dandelion Wine</title>
+		<pages>121</pages>
+	</book>
+	<book>
+		<author>Ray Bradbury</author>
+		<title>Something Wicked This Way Comes</title>
+		<pages>427</pages>
+	</book>
+	<book>
+		<author>Agatha Christie</author>
+		<title>Murder on the Orient Express</title>
+		<pages>102</pages>
+	</book>
+	<book>
+		<author>Agatha Christie</author>
+		<title>And Then There Were None</title>
+		<pages>396</pages>
+	</book>
+	<book>
+		<author>Agatha Christie</author>
+		<title>Death on the Nile</title>
+		<pages>429</pages>
+	</book>
+	<book>
+		<author>Agatha Christie</author>
+		<title>Cards on the Table</title>
+		<pages>506</pages>
+	</book>
+	<book>
+		<author>Agatha Christie</author>
+		<title>Evil Under the Sun</title>
+		<pages>329</pages>
+	</book>
+	<book>
+		<author>Ernest Hemingway</author>
+		<title>The Old Man and the Sea</title>
+		<pages>94</pages>
+	</book>
+	<book>
+		<author>Ernest Hemingway</author>
+		<title>A Farewell to Arms</title>
+		<pages>352</pages>
+	</book>
+	<book>
+		<author>Ernest Hemingway</author>
+		<title>For Whom the Bell Tolls</title>
+		<pages>266</pages>
+	</book>
+	<book>
+		<author>Gabriel García Márquez</author>
+		<title>One Hundred Years of Solitude</title>
+		<pages>66</pages>
+	</book>
+	<book>
+		<author>Gabriel García Márquez</author>
+		<title>Love in the Time of Cholera</title>
+		<pages>65</pages>
+	</book>
+	<book>
+		<author>Stephen King</author>
+		<title>It</title>
+		<pages>97</pages>
+	</book>
+	<book>
+		<author>Stephen King</author>
+		<title>The Shining</title>
+		<pages>161</pages>
+	</book>
+	<book>
+		<author>Stephen King</author>
+		<title>Pet Sematary</title>
+		<pages>169</pages>
+	</book>
+	<book>
+		<author>Stephen King</author>
+		<title>The Green Mile</title>
+		<pages>308</pages>
+	</book>
+	<book>
+		<author>Jules Verne</author>
+		<title>The Mysterious Island</title>
+		<pages>358</pages>
+	</book>
+	<book>
+		<author>Jules Verne</author>
+		<title>Twenty Thousand Leagues Under the Seas</title>
+		<pages>63</pages>
+	</book>
+	<book>
+		<author>Jules Verne</author>
+		<title>Around the World in Eighty Days</title>
+		<pages>337</pages>
+	</book>
+	<book>
+		<author>Frank Herbert</author>
+		<title>Dune</title>
+		<pages>151</pages>
+	</book>
+	<book>
+		<author>Frank Herbert</author>
+		<title>Dune Messiah</title>
+		<pages>416</pages>
+	</book>
+	<book>
+		<author>Frank Herbert</author>
+		<title>Children of Dune</title>
+		<pages>382</pages>
+	</book>
+	<book>
+		<author>Frank Herbert</author>
+		<title>God Emperor of Dune</title>
+		<pages>409</pages>
+	</book>
+	<book>
+		<author>J.R.R. Tolkien</author>
+		<title>The Hobbit</title>
+		<pages>329</pages>
+	</book>
+	<book>
+		<author>J.R.R. Tolkien</author>
+		<title>The Fellowship of the Ring</title>
+		<pages>264</pages>
+	</book>
+	<book>
+		<author>J.R.R. Tolkien</author>
+		<title>The Two Towers</title>
+		<pages>162</pages>
+	</book>
+	<book>
+		<author>J.R.R. Tolkien</author>
+		<title>The Return of the King</title>
+		<pages>279</pages>
+	</book>
+	<book>
+		<author>Arthur Conan Doyle</author>
+		<title>A Study in Scarlet</title>
+		<pages>351</pages>
+	</book>
+	<book>
+		<author>Arthur Conan Doyle</author>
+		<title>The Sign of the Four</title>
+		<pages>192</pages>
+	</book>
+	<book>
+		<author>Arthur Conan Doyle</author>
+		<title>The Hound of the Baskervilles</title>
+		<pages>464</pages>
+	</book>
+	<book>
+		<author>Mary Shelley</author>
+		<title>Frankenstein</title>
+		<pages>495</pages>
+	</book>
+	<book>
+		<author>H.G. Wells</author>
+		<title>The Time Machine</title>
+		<pages>53</pages>
+	</book>
+	<book>
+		<author>H.G. Wells</author>
+		<title>The War of the Worlds</title>
+		<pages>438</pages>
+	</book>
+	<book>
+		<author>H.G. Wells</author>
+		<title>The Invisible Man</title>
+		<pages>462</pages>
+	</book>
+	<book>
+		<author>H.G. Wells</author>
+		<title>The Island of Doctor Moreau</title>
+		<pages>131</pages>
+	</book>
+</library>
