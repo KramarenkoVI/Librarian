@@ -1,4 +1,5 @@
 ﻿using Librarian.models;
+
 namespace Librarian.interfaces
 {
     public interface IDataProcessor

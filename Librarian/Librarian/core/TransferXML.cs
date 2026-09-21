@@ -1,6 +1,7 @@
 ﻿using Librarian.models;
 using Librarian.interfaces;
 using System.Xml.Serialization;
+
 namespace Librarian.core
 {
     public class TransferXML : IDataTransfer
@@ -33,6 +34,9 @@ namespace Librarian.core
         {
             try
             {
+                if (books is null)
+                    throw new ArgumentNullException(nameof(books), "The books collection cannot be null.");
+
                 ListOfBooksModel data = new ListOfBooksModel();
                 foreach (BookModel book in books)
                 {

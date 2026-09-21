@@ -1,41 +1,65 @@
 using Librarian.models;
 using Librarian.core;
 using Librarian.interfaces;
+
 namespace Librarian.Tests;
 
 public class TransferTests
 {
     [Fact]
-    public void Debug()
+    public void GetData()
     {
         IDataTransfer delivery = new TransferXML();
         List<BookModel> books = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks.xml"));
-        //books.Add(new BookModel()
-        //{
-        //    Title = "New Record",
-        //    Author = "Debug",
-        //    Pages = 50
-        //}
-        //);
-        //delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), books);
-
-        IDataProcessor processor = new Processor(books);
-        processor.AddBook(new BookModel() { Author = "AAA", Title = "DELETE ME", Pages = 80 });
-        processor.ViewList();
-        processor.SortBooks();
-        processor.SortBooks(books);
-        processor.SerachBooks("ride and"); //true
-        processor.SerachBooks("b");
-        processor.SerachBooks("B");
-        processor.SerachBooks(" ");
-        processor.SerachBooks("");
-        processor.SerachBooks(string.Empty);
-        processor.SerachBooks("Murder in the Orient Express"); //false
-        processor.DeleteBook(new BookModel() { Author = "AAA", Title = "DELETE ME", Pages = 80 });
-        processor.DeleteBook(0);
-        processor.DeleteBook(172);
-        processor.DeleteBook(-17);
-        processor.DeleteBook(new BookModel() { Author = "XXX", Title = "DELETE ME!", Pages = 80 });
-        Assert.True(true);
+        Assert.True(books.Count == 42);
     }
+
+    [Fact]
+    public void GetDataWrongWay()
+    {
+        IDataTransfer delivery = new TransferXML();
+        var exception = Assert.Throws<Exception>(() => delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "randomFolder", "randomFile.xml")));
+        Assert.Equal("File not found", exception.Message);
+    }
+
+    [Fact]
+    public void SaveData()
+    {
+        IDataTransfer delivery = new TransferXML();
+        List<BookModel> books = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks.xml"));
+        delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), books);
+        List<BookModel> savedBooks = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"));
+        Assert.True(savedBooks.Count == 42);
+    }
+
+    [Fact]
+    public void SaveEmptyData()
+    {
+        IDataTransfer delivery = new TransferXML();
+        delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), new List<BookModel>());
+        List<BookModel> savedBooks = delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"));
+        Assert.True(savedBooks.Count == 0);
+    }
+
+    [Fact]
+    public void SaveNullData()
+    {
+        IDataTransfer delivery = new TransferXML();
+        var exception = Assert.Throws<ArgumentNullException>(() => delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), null));
+        Assert.Equal("The books collection cannot be null. (Parameter 'books')", exception.Message);
+    }
+
+    #region Helpers
+    private List<BookModel> GetTestData()
+    {
+        IDataTransfer delivery = new TransferXML();
+        return delivery.GetData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks.xml"));
+    }
+
+    private void SaveTestData(List<BookModel> data)
+    {
+        IDataTransfer delivery = new TransferXML();
+        delivery.SaveData(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestsData", "TestListOfBooks(saved).xml"), data);
+    }
+    #endregion
 }
